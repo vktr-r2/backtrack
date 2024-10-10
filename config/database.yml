@@ -13,13 +13,13 @@ default: &default
   adapter: mysql2
   encoding: utf8mb4
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  username: root
-  password:
+  username: <%= ENV["DB_USERNAME"] %>
+  password: <%= ENV["DB_PASSWORD"] %>
   socket: /tmp/mysql.sock
 
 development:
   <<: *default
-  database: backtrack_development
+  database: backtrack_dev
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -50,6 +50,6 @@ test:
 #
 production:
   <<: *default
-  database: backtrack_production
-  username: backtrack
-  password: <%= ENV["BACKTRACK_DATABASE_PASSWORD"] %>
+  database: backtrack_prod
+  username: <%= ENV["USER_TBD"] %>
+  password: <%= ENV["PW_TBD"] %>
