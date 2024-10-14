@@ -13,4 +13,11 @@
         <input type="submit" value="Sign up">
       </form>
     </div>
+    <div class="flash-messages">
+      <% flash.each do |key, message| %>
+        <div class="<%= key %>">
+          <%= message %>
+        </div>
+      <% end %>
+    </div>
   </div>
