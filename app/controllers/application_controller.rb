@@ -9,6 +9,6 @@ class ApplicationController < ActionController::Base
   end
 
   def require_user
-    redirect_to login_path unless current_user, alert: "You must be logged in to view this page"
+    redirect_to(login_path, alert: "You must be logged in to view this page") unless current_user
   end
 end
