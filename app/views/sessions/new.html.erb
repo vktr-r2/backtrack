@@ -1,0 +1,28 @@
+<div class="login">
+  <div class="container">
+    <div class="form">
+      <h1>Login</h1>
+      <%= form_with(url: "/login", method: :post, local: true) do |form| %>
+        <div>
+          <%= form.label :email %>
+          <%= form.email_field :email, name: "session[email]" %>
+        </div>
+        <div>
+          <%= form.label :password %>
+          <%= form.password_field :password, name: "session[password]" %>
+        </div>
+        <div>
+          <%= form.submit "Sign In" %>
+        </div>
+      <% end %>
+    </div> <!-- Closing div for "form" -->
+
+    <div class="flash-messages">
+      <% flash.each do |key, message| %>
+        <div class="<%= key %>">
+          <%= message %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
