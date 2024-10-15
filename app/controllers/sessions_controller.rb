@@ -6,9 +6,9 @@ class SessionsController < ApplicationController
     @user = User.find_by_email(params[:session][:email])
     if @user && @user.authenticate(params[:session][:password])
       session[:user_id] = @user.id
-      redirect_to "/", allow_other_host: true, notice: "Logged in successfully"
+      redirect_to dashboard_path, allow_other_host: true, notice: "Logged in successfully"
     else
-      redirect_to "/login", allow_other_host: true, alert: "Invalid email or password"
+      redirect_to login_path, allow_other_host: true, alert: "Invalid email or password"
     end 
   end 
 

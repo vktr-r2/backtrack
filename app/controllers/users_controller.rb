@@ -9,7 +9,7 @@ class UsersController < ApplicationController
     if @user.save
       # IMPORTANT: move off of user_id being used in session
       session[:user_id] = @user.id
-      redirect_to "/", notice: "Account created successfully"
+      redirect_to dashboard_path, notice: "Account created successfully"
     else
       redirect_to signup_path, alert: "Failed to create account"
     end

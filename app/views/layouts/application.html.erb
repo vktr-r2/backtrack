@@ -18,5 +18,17 @@
 
   <body>
     <%= yield %>
+    <% if current_user %> 
+      <ul> 
+        <li><%= current_user.email %></li> 
+        <li><%= button_to "Log out", logout_path, method: "delete", class: 'btn btn-small' %></li> 
+      </ul> 
+    <% else %> 
+      <ul> 
+        <li><%= link_to "Login", 'login' %></a></li> 
+        <li><%= link_to "Signup", 'signup' %></a></li> 
+      </ul> 
+    <% end %> 
+    <%= javascript_importmap_tags %> 
   </body>
 </html>
