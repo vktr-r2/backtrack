@@ -21,16 +21,15 @@ Rails.application.routes.draw do
   # Routes
   get "signup" => "users#new"
   post "signup" => "users#create"
+  
   resources :users
+  resources :password_resets, only: [:new, :create, :edit, :update]
 
   get "login" => "sessions#new"
   post "login" => "sessions#create"
   delete "logout" => "sessions#destroy"
 
-  #get "users/:id/profile" => "user_profiles#show", as: :show_user_profile
 
-  #get "users/:id/profile/update" => "user_profiles#edit", as: :edit_user_profile
-  #post "users/:id/profile/update" => "users#update", as: :update_user_profile
 
   get "dashboard" => "dashboard#show", as: :dashboard
 end
