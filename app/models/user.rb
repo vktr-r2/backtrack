@@ -10,23 +10,27 @@ class User < ApplicationRecord
 
   # Generate a signed token with 1hr expiration time
   def generate_password_reset_token
-    verifier.generate({user_id: id, expiring_at: 1.hours.from_now})
+    self.class.verifier.generate({user_id: id, expires_at: 1.hour.from_now})
   end
 
-  # Class method to verify the token and return the user
+  # Verify the token and return the user
   def self.verify_password_reset_token(token)
-    data = verifier.veried(token)
-    return if data.blank? || data[:expires_at] < Time.current
+    begin
+      data = verifier.verify(token)
+      return if data.blank? || data[:expires_at] < Time.current
 
-    find_by(id: data[:user_id])
+      find_by(id: data[:user_id])
+    rescue ActiveSupport::MessageVerifier::InvalidSignature
+      nil # Invalid token
+    end
   end
 
   private
-  def self.verifiers
+  # Generates a secret key for signing
+  def self.verifier
     ActiveSupport::MessageVerifier.new(Rails.application.secret_key_base, digest: "SHA256")
   end
   
-  private
   def normalize_email
     self.email = self.email.delete(' ').downcase
   end

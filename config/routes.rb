@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get "password_resets/new"
+  get "password_resets/create"
+  get "password_resets/edit"
+  get "password_resets/update"
   get "user_profiles/show"
   get "user_profiles/update"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
