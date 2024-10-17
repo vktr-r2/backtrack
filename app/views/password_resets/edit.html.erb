@@ -1,2 +1,10 @@
-<h1>PasswordResets#edit</h1>
-<p>Find me in app/views/password_resets/edit.html.erb</p>
+<h1>Reset Your Password</h1>
+<%= form_with(url: password_reset_path(token: params[:token]), local: true) do |form| %>
+  <%= form.label :password %>
+  <%= form.password_field :password, class: "form-control" %>
+
+  <%= form.label :password_confirmation %>
+  <%= form.password_field :password_confirmation, class: "form-control" %>
+
+  <%= form.submit "Update Password", class: "btn btn-primary" %>
+<% end %>
